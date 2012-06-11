@@ -1,8 +1,9 @@
 #######################################################################################
 #template_secondary_data_analysis.R is licensed under a Creative Commons Attribution - Non commercial 3.0 Unported License. see full license at the end of this file.
 #######################################################################################
-#this script follows, or attempts to follow, a combination of the guidelines proposed by Hadley Wickham http://goo.gl/c04kq as well as using the formatR package http://goo.gl/ri6ky
-#manuscript title
+#this script follows a combination of the guidelines proposed by Hadley Wickham http://goo.gl/c04kq as well as using the formatR package http://goo.gl/ri6ky
+
+#link to manuscript
 
 #####################################################################################
 #SETTING ENVIRONMENT
@@ -13,34 +14,29 @@ ls()
 #dettach all packages
 detach()
 
+#command below will install all packages and is only run once. remove the #if this is the first time you are running the code on RStudio, and then you can add the hash tag again
 #lapply(c("ggplot2", "psych", "RCurl", "irr", "car","Hmisc", "gmodels", "DAAG"), install.packages, character.only=T)
 
 lapply(c("ggplot2", "psych", "RCurl", "irr", "car","Hmisc", "gmodels","qpcR"), library, character.only=T)
 
 #####################################################################################
-#IMPORTING DATA
+#IMPORTING DATA AND RECODING
 #####################################################################################
 
 #if you are using a file that is local to your computer, then replace path below by path to the data file. command will throw all the data into the templateData object
-templateData <- read.csv("/Users/rpietro/Google Drive/R/nonpublicdata/ERAS/eras.csv", stringsAsFactors=FALSE)
+templateData <- read.csv("/Users/rpietro/Google Drive/R/nonpublicdata/ERAS/eras.csv")
 
-#STOPPED HERE
-#if you are using a data set that is on some kind of cloud, then replace path below by the file location. for more details, see video at 
-
-options(RCurlOptions = list(capath = system.file("CurlSSL", "cacert.pem", package = "RCurl"), ssl.verifypeer = FALSE))
-#see http://goo.gl/mQwxO on how to get this link
-#link below won't work until data is entered in the right format
-olecranon.data <- getURL("https://docs.google.com/spreadsheet/pub?key=0ArVW3PoO2euydHVHcVU2S3BROWRYM29OYWhNTGlMUVE&single=true&gid=0&output=csv")
-read.csv(textConnection(olecranon.data))
 
 #below will view data in a spreadsheet format
 #View(erasData)
-#below will list variable names, classes (integer, factor, etc), alternative responses
-str(erasData)
-#list variable names so that they can be used later
-#names(eras.data)
-attach(erasData)
 
+#below will list variable names, classes (integer, factor, etc), alternative responses
+str(templateData)
+#list variable names so that they can be used later
+names(templateData)
+attach(templateData)
+
+#STOPPED HERE
 
 ###########################################################################################
 #TABLE 1: DEMOGRAPHICS
