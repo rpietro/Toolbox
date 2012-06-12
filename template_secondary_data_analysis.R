@@ -14,21 +14,24 @@ ls()
 #dettach all packages
 detach()
 
-#command below will install all packages and is only run once. remove the #if this is the first time you are running the code on RStudio, and then you can add the hash tag again
-#lapply(c("ggplot2", "psych", "RCurl", "irr", "car","Hmisc", "gmodels", "DAAG"), install.packages, character.only=T)
+#command below will install individual and is only run once. remove the hash tag if this is the first time you are running the code on RStudio, and then you can add the hash tag again
+#install.packages("ggplot2")
+install.packages("car",  repos="http://cran.r-project.org")
 
-lapply(c("ggplot2", "psych", "RCurl", "irr", "car","Hmisc", "gmodels","qpcR"), library, character.only=T)
-
+#command below will install each package. if you run this script from the beginning you need to run every single one again
+library("ggplot2")
+library("car")
 #####################################################################################
 #IMPORTING DATA AND RECODING
 #####################################################################################
 
 #if you are using a file that is local to your computer, then replace path below by path to the data file. command will throw all the data into the templateData object
-templateData <- read.csv("/Users/rpietro/Google Drive/R/nonpublicdata/ERAS/eras.csv")
+templateData <- read.csv("/Users/rpietro/Google Drive/R/nonpublicdata/data.csv")
 
 
-#below will view data in a spreadsheet format
-#View(erasData)
+#below will view data in a spreadsheet format. notice that in this all subsequent commands you have to replace templateData with whatever name you chose for your data object in the previous command
+
+#View(templateData)
 
 #below will list variable names, classes (integer, factor, etc), alternative responses
 str(templateData)
@@ -36,13 +39,14 @@ str(templateData)
 names(templateData)
 attach(templateData)
 
-#STOPPED HERE
+#function below is used to recode variables. things to notice: replace old.var with the variable you are recoding, replace new.var with the variable you want to create. the whole recoding happens within " ". all character and factor variables will be within '', numbers will be displayed with digits (not inside '') or NA (also without '')
+new.var  <- recode(old.var, " c(1,2) = 'A'; else = 'B' ")
 
 ###########################################################################################
 #TABLE 1: DEMOGRAPHICS
 ###########################################################################################
 
-describe(erasData)
+describe(templateData)
 
 t.test(age~year)
 t.test(bmi~year)
