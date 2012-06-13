@@ -15,8 +15,7 @@ ls()
 detach()
 
 #command below will install individual and is only run once. remove the hash tag if this is the first time you are running the code on RStudio, and then you can add the hash tag again
-#install.packages("ggplot2")
-install.packages("car",  repos="http://cran.r-project.org")
+install.packages("car", repos="http://cran.r-project.org")
 
 #command below will install each package. if you run this script from the beginning you need to run every single one again
 library("ggplot2")
