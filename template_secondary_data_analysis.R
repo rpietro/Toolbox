@@ -40,7 +40,12 @@ names(templateData)
 attach(templateData)
 
 #function below is used to recode variables. things to notice: replace old.var with the variable you are recoding, replace new.var with the variable you want to create. the whole recoding happens within " ". all character and factor variables will be within '', numbers will be displayed with digits (not inside '') or NA (also without '')
-new.var  <- car::recode(old.var, " c(1,2) = 'A'; else = 'B' ")
+
+class(old.var)
+levels(old.var)
+new.var  <- car::recode(old.var, " 1:2 = 'A'; 3 = 'C'; '' = NA; else = 'B' ")
+summary(new.var)
+levels(new.var)
 
 ###########################################################################################
 #TABLE 1: DEMOGRAPHICS
